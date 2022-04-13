@@ -11,7 +11,6 @@ class Meter(object):
     def start(self, filename):
         self.filename = filename
         self.file = open(filename, 'a+')
-        print(os.path.exists(filename))
         self.wattsup_process = subprocess.Popen(self.cmd, stdout=self.file, stderr=subprocess.STDOUT, close_fds=True)
         print(f'meter {self.port} started.')
 

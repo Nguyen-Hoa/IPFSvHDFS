@@ -13,7 +13,7 @@ class Meter(object):
         dirname = os.path.dirname(filename)
         if not os.path.exists(dirname):
             os.makedirs(dirname)
-        self.file = open(dirname, 'a+')
+        self.file = open(filename, 'a+')
         self.wattsup_process = subprocess.Popen(self.cmd, stdout=self.file, stderr=subprocess.STDOUT, close_fds=True)
         print(f'meter {self.port} started.')
 

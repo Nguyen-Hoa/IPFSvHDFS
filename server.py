@@ -4,6 +4,7 @@
 import sys
 from flask import Flask, request, jsonify, render_template, Response
 from meter import Meter, Util
+from env import pids
 
 # get system parameters
 import datetime as dt
@@ -21,7 +22,7 @@ def get_current_time(start=0, end=-1):
 app = Flask(__name__)
 
 power_meter = Meter('ttyUSB0')
-util_meter = Util('3222588,3223869')
+util_meter = Util(pids)
 
 @app.route('/api/watts-up-meter-start', methods=['POST'])
 def start_meter():

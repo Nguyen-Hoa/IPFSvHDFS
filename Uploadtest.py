@@ -4,6 +4,7 @@ import subprocess
 import threading
 import datetime as dt
 import requests
+from env import pids
 
 def get_current_time(start=0, end=-1):
     """
@@ -16,9 +17,9 @@ def get_current_time(start=0, end=-1):
 now = get_current_time(start=5, end=-10)
 
 peers = [
-    'http://kimchi.mocalab.org:3000/api/',
     'http://kraken.mocalab.org:3000/api/',
     'http://medusa.mocalab.org:3000/api/',
+    'http://kimchi.mocalab.org:3000/api/',
 ]
 
 # Start remote measurements
@@ -26,12 +27,12 @@ for ip in peers:
     response = requests.post(ip+'watts-up-meter-start')
     if response.status_code != 200:
         print(f'Failed to start meter at {ip}')
-        return 0
+        exit()
 
 # Start local measurements
 power_meter = Meter('ttyUSB0')
 power_meter.start(f'./results/{now}.power')
-util_meter = Util('3222588,3223869')
+util_meter = Util(pids)
 util_meter.start(f'./results/{now}.util')
 
 sleep(3)
@@ -58,6 +59,6 @@ for ip in peers:
     response = requests.post(ip+'watts-up-meter-end')
     if response.status_code != 200:
         print(f'Failed to start meter at {ip}')
-        return 0
+        exit()
 
 print(f'Pinning <{filename}> took: {t_final} seconds')

@@ -31,23 +31,21 @@ for ip in peers:
 # Start local measurements
 power_meter = Meter('ttyUSB0')
 power_meter.start(f'./results/{now}.power')
-
-sleep(3)
-
 util_meter = Util('3222588,3223869')
 util_meter.start(f'./results/{now}.util')
 
+sleep(3)
 
 # Begin pinning
 filename = './data/images.tar'
 cmd = ['ipfs-cluster-ctl', 'add', '-n', 'tar_dogs', filename]
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-sleep(3)
-
 t0 = time()
 output = process.communicate()
 t_final = time() - t0
+
+sleep(3)
 
 print(output)
 

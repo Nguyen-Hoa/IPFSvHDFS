@@ -27,7 +27,6 @@ util_meter = Util('3222588,3223869')
 def start_meter():
     try:
         now = get_current_time(start=5, end=-10)
-        key = request.form['key']
         power_meter.start(f'./results/{now}.power')
         util_meter.start(f'./results/{now}.util')
         return jsonify(result={'message': 'meters successfully started'}), 200

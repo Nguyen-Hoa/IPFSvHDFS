@@ -4,7 +4,7 @@ import subprocess
 import threading
 import datetime as dt
 import requests
-from env import pids
+from env import pids, peers, target_file
 
 def get_current_time(start=0, end=-1):
     """
@@ -15,12 +15,6 @@ def get_current_time(start=0, end=-1):
     now = now[start:end]
     return now
 now = get_current_time(start=5, end=-10)
-
-peers = [
-    'http://kraken.mocalab.org:3000/api/',
-    'http://medusa.mocalab.org:3000/api/',
-    'http://kimchi.mocalab.org:3000/api/',
-]
 
 # Start remote measurements
 for ip in peers:
@@ -38,8 +32,7 @@ util_meter.start(f'./results/{now}.util')
 sleep(3)
 
 # Begin pinning
-filename = './data/images.tar'
-cmd = ['ipfs-cluster-ctl', 'add', '-n', 'tar_dogs', filename]
+cmd = ['ipfs-cluster-ctl', 'add', '-n', 'tar_dogs', target_file]
 process = subprocess.Popen(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
 t0 = time()
@@ -61,4 +54,4 @@ for ip in peers:
         print(f'Failed to start meter at {ip}')
         exit()
 
-print(f'Pinning <{filename}> took: {t_final} seconds')
+print(f'Pinning <{target_file}> took: {t_final} seconds')

@@ -4,7 +4,6 @@
 import sys
 from flask import Flask, request, jsonify, render_template, Response
 from meter import Meter, Util
-from env import pids
 
 # get system parameters
 import datetime as dt

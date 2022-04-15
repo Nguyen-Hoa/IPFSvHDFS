@@ -1,3 +1,5 @@
+import requests
+
 peers = [
     'http://gimbap.mocalab.org:3000/api/',
     'http://kimchi.mocalab.org:3000/api/',
@@ -7,7 +9,6 @@ peers = [
 
 key = input('Enter a "b" to begin, "e" to end, or "q" to quit: ')
 while key != 'q':
-    key = input()
     if key == 'b':
         # Start remote measurements
         print('starting loggers...')
@@ -27,4 +28,6 @@ while key != 'q':
                 print(f'Failed to start meter at {ip}')
                 exit()
         print('stopped all remote loggers. Enter "q" to quit.')
+    key = input()
+    
         

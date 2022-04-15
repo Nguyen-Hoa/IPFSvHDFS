@@ -5,7 +5,7 @@ peers = [
     'http://medusa.mocalab.org:3000/api/'
 ]
 
-key = input()
+key = input('Enter a "b" to begin, "e" to end, or "q" to quit: ')
 while key != 'q':
     key = input()
     if key == 'b':
@@ -15,6 +15,7 @@ while key != 'q':
             if response.status_code != 200:
                 print(f'Failed to start meter at {ip}')
                 exit()
+        print('started all remote loggers. Enter "e" to end.')
 
     elif key == 'e':
         # Close remote measurements
@@ -23,3 +24,5 @@ while key != 'q':
             if response.status_code != 200:
                 print(f'Failed to start meter at {ip}')
                 exit()
+        print('stopped all remote loggers. Enter "q" to quit.')
+        

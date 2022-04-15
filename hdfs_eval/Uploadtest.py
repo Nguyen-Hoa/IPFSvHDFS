@@ -10,6 +10,7 @@ while key != 'q':
     key = input()
     if key == 'b':
         # Start remote measurements
+        print('starting loggers...')
         for ip in peers:
             response = requests.post(ip+'watts-up-meter-start')
             if response.status_code != 200:
@@ -19,6 +20,7 @@ while key != 'q':
 
     elif key == 'e':
         # Close remote measurements
+        print('stopping loggers...')
         for ip in peers:
             response = requests.post(ip+'watts-up-meter-end')
             if response.status_code != 200:

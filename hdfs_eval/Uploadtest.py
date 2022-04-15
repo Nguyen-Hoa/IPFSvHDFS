@@ -8,7 +8,7 @@ peers = [
 ]
 
 key = input('Enter a "b" to begin, "e" to end, or "q" to quit: ')
-while key != 'q':
+while True:
     if key == 'b':
         # Start remote measurements
         print('starting loggers...')
@@ -19,7 +19,7 @@ while key != 'q':
                 exit()
         print('started all remote loggers. Enter "e" to end.')
 
-    elif key == 'e':
+    elif key in ['e', 'q']:
         # Close remote measurements
         print('stopping loggers...')
         for ip in peers:

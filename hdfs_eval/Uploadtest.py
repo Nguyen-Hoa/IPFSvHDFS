@@ -5,6 +5,7 @@ peers = [
     'http://medusa.mocalab.org:3000/api/'
 ]
 
+key = input()
 while key != 'q':
     key = input()
     if key == 'b':
